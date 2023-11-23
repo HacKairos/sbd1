@@ -1,9 +1,21 @@
-CREATE OR REPLACE FUNCTION registrador_tipo() RETURNS TRIGGER AS $registrador_tipo$
+CREATE OR REPLACE FUNCTION registrador_tipoF() RETURNS TRIGGER AS $registrador_tipoF$
 BEGIN
-    update pessoa_controller set tipo = 'funcionario' and id_pessoa = new.id_funcionario where id_pessoa = NEW.id_funcionario;
+    INSERT INTO pessoa_controller (id_pessoa, tipo) VALUES (NEW.id_funcionario, 'funcionario');
+    RETURN NEW;
 END;
-$registrador_tipo$ LANGUAGE plpgsql;
+$registrador_tipoF$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE TRIGGER registrador_tipo 
+CREATE OR REPLACE TRIGGER registrador_tipoF 
 BEFORE INSERT ON funcionario
-FOR EACH ROW EXECUTE PROCEDURE registrador_tipo();
+FOR EACH ROW EXECUTE PROCEDURE registrador_tipoF();
+
+CREATE OR REPLACE FUNCTION registrador_tipoC() RETURNS TRIGGER AS $registrador_tipoC$
+BEGIN
+    INSERT INTO pessoa_controller (id_pessoa, tipo) VALUES (NEW.id_cliente, 'cliente');
+    RETURN NEW;
+END;
+$registrador_tipoC$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE TRIGGER registrador_tipoC 
+BEFORE INSERT ON cliente
+FOR EACH ROW EXECUTE PROCEDURE registrador_tipoC();
