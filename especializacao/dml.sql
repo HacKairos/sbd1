@@ -1,5 +1,7 @@
-INSERT INTO pessoa (id,tipo,nome,endereco) VALUES
-(1,'cliente','Joao','Rua 1'),
-(2,'cliente','Maria','Rua 2'),
-(3,'funcionario','Pedro','Rua 3'),
-(4,'funcionario','Paulo','Rua 4');
+INSERT INTO pessoa (id,nome) VALUES
+(1,'joao'),
+(2,'maria'),
+(3,'pedro'),
+(4,'joana'),
+(5,'carlos'),
+(6,'ana');
